@@ -1,55 +1,64 @@
 #PostgreSQL 9 cheat sheet
 
 
+##PostgreSQL interactive terminal
+Type "help" for help.
+
+####Connect to a database
+`psql -U [user_name] -d [dbname]`
+
+####Connect and show internal queries
+`psql -U postgres -E`
+
+
 ##Backup
 
 ####to a zipped file
-`pg_dump -U postgres -Fc -f __FILE_NAME__.dump __DBNAME__`
+`pg_dump -U postgres -Fc -f [file_name.dump] [dbname]`
 
 ####to a script file
-`pg_dump -U postgres -f __FILE_NAME__.sql __DBNAME__`
+`pg_dump -U postgres -f [file_name.sql] [dbname]`
 
 
 ##Restore
 
 ####a dump file
 ```
-dropdb -U __USER_NAME__ --if-exists __DBNAME__
-createdb -U __USER_NAME__ -E 'UTF-8' __DBNAME__
-psql -U __USER_NAME__ -d __DBNAME__ -c "DROP EXTENSION IF EXISTS plpgsql;"
-pg_restore -U __USER_NAME__ -j THREADS --dbname=__DBNAME__ __FILE_NAME__.dump
+dropdb -U [user_name] --if-exists [dbname]
+createdb -U [user_name] -E 'UTF-8' [dbname]
+psql -U [user_name] -d [dbname] -c "DROP EXTENSION IF EXISTS plpgsql;"
+pg_restore -U [user_name] -j [threads] --dbname=[dbname] [file_name.dump]
 ```
 
-####a dump file, if __USER_NAME__ cannot create a database
+####a dump file, if [user_name] cannot create a database
 ```
-createdb -U postgres -O __USER_NAME__ -E 'UTF-8' __DBNAME__
-pg_restore -U postgres -j THREADS -O --role=__USER_NAME__ --dbname=__DBNAME__ --table=table_name __FILE_NAME__.dump
+createdb -U postgres -O [user_name] -E 'UTF-8' [dbname]
+pg_restore -U postgres -j [threads] -O --role=[user_name] --dbname=[dbname] --table=table_name [file_name.dump]
 ```
 
 ####only one table from a dump file
-`pg_restore -U __USER_NAME__ --dbname=__DBNAME__ --table=table_name __FILE_NAME__.dump`
+`pg_restore -U [user_name] --dbname=[dbname] --table=table_name [file_name.dump]`
 
 ####a SQL script (same as executing any SQL script)
-`psql -U __USER_NAME__ -d __DBNAME__ -f __FILE_NAME__.sql`
+`psql -U [user_name] -d [dbname] -f [file_name.sql]`
 
 
 ##Database administration
 
 ####Create a database
-`psql -U __USER_NAME__ -c "CREATE DATABASE __DBNAME__ ENCODING 'UTF-8';"`
+`psql -U [user_name] -c "CREATE DATABASE [dbname] ENCODING 'UTF-8';"`
 
 ####Create a database with Postgres tool
-`createdb -U __USER_NAME__ -E 'UTF-8' __DBNAME__`
+`createdb -U [user_name] -E 'UTF-8' [dbname]`
 
 ####Drop a database
-`psql -U __USER_NAME__ -c "DROP DATABASE __DBNAME__;"`
+`psql -U [user_name] -c "DROP DATABASE [dbname];"`
 
 ####Drop a database with Postgres tool
-`dropdb -U __USER_NAME__ __DBNAME__`
+`dropdb -U [user_name] [dbname]`
 
 
 ##Monitoring commands
-
 
 ####Running queries
 ```SQL
