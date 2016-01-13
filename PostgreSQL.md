@@ -14,12 +14,16 @@
 
 ####a dump file
 `dropdb -U user_name --if-exists database_name`
+
 `createdb -U user_name -E 'UTF-8' database_name`
+
 `psql -U user_name -d database_name -c "DROP EXTENSION IF EXISTS plpgsql;"`
+
 `pg_restore -U user_name -j number_of_threads --dbname=database_name file_name.dump`
 
 ####a dump file, if user_name cannot create a database
 `createdb -U postgres -O user_name -E 'UTF-8' database_name`
+
 `pg_restore -U postgres -j number_of_threads -O --role=user_name --dbname=database_name --table=table_name file_name.dump`
 
 ####only one table from a dump file
@@ -69,5 +73,7 @@ SELECT name, setting, boot_val, reset_val, unit FROM pg_settings ORDER BY name;
 
 ####Last autovacuum
 ```SQL
-SELECT last_autovacuum, last_autoanalyze FROM pg_stat_user_tables WHERE last_autovacuum IS NOT NULL ORDER BY last_autovacuum DESC;
+SELECT last_autovacuum, last_autoanalyze FROM pg_stat_user_tables
+    WHERE last_autovacuum IS NOT NULL
+    ORDER BY last_autovacuum DESC;
 ```
