@@ -4,48 +4,48 @@
 ##Backup
 
 ####to a zipped file
-`pg_dump -U postgres -Fc -f file_name.dump database_name`
+`pg_dump -U postgres -Fc -f __FILE_NAME__.dump __DBNAME__`
 
 ####to a script file
-`pg_dump -U postgres -f file_name.sql database_name`
+`pg_dump -U postgres -f __FILE_NAME__.sql __DBNAME__`
 
 
 ##Restore
 
 ####a dump file
-`dropdb -U user_name --if-exists database_name`
+```
+dropdb -U __USER_NAME__ --if-exists __DBNAME__
+createdb -U __USER_NAME__ -E 'UTF-8' __DBNAME__
+psql -U __USER_NAME__ -d __DBNAME__ -c "DROP EXTENSION IF EXISTS plpgsql;"
+pg_restore -U __USER_NAME__ -j THREADS --dbname=__DBNAME__ __FILE_NAME__.dump
+```
 
-`createdb -U user_name -E 'UTF-8' database_name`
-
-`psql -U user_name -d database_name -c "DROP EXTENSION IF EXISTS plpgsql;"`
-
-`pg_restore -U user_name -j number_of_threads --dbname=database_name file_name.dump`
-
-####a dump file, if user_name cannot create a database
-`createdb -U postgres -O user_name -E 'UTF-8' database_name`
-
-`pg_restore -U postgres -j number_of_threads -O --role=user_name --dbname=database_name --table=table_name file_name.dump`
+####a dump file, if __USER_NAME__ cannot create a database
+```
+createdb -U postgres -O __USER_NAME__ -E 'UTF-8' __DBNAME__
+pg_restore -U postgres -j THREADS -O --role=__USER_NAME__ --dbname=__DBNAME__ --table=table_name __FILE_NAME__.dump
+```
 
 ####only one table from a dump file
-`pg_restore -U user_name --dbname=database_name --table=table_name file_name.dump`
+`pg_restore -U __USER_NAME__ --dbname=__DBNAME__ --table=table_name __FILE_NAME__.dump`
 
 ####a SQL script (same as executing any SQL script)
-`psql -U user_name -d database_name -f file_name.sql`
+`psql -U __USER_NAME__ -d __DBNAME__ -f __FILE_NAME__.sql`
 
 
 ##Database administration
 
 ####Create a database
-`psql -U user_name -c "CREATE DATABASE database_name ENCODING 'UTF-8';"`
+`psql -U __USER_NAME__ -c "CREATE DATABASE __DBNAME__ ENCODING 'UTF-8';"`
 
 ####Create a database with Postgres tool
-`createdb -U user_name -E 'UTF-8' database_name`
+`createdb -U __USER_NAME__ -E 'UTF-8' __DBNAME__`
 
 ####Drop a database
-`psql -U user_name -c "DROP DATABASE database_name;"`
+`psql -U __USER_NAME__ -c "DROP DATABASE __DBNAME__;"`
 
 ####Drop a database with Postgres tool
-`dropdb -U user_name database_name`
+`dropdb -U __USER_NAME__ __DBNAME__`
 
 
 ##Monitoring commands
