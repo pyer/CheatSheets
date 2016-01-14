@@ -1,7 +1,13 @@
-#github cheat sheet
+#GitHub cheat sheet
 
 
-####clone the repository and set the URL
+Remote repository holds files on GitHub server.
+
+Local repository consists of the Working Directory, the Staging Area and the Git Directory.
+
+
+
+####clone the remote repository and set the URL
 ```
 git clone git://github.com/pyer/[repo]
 git remote set-url origin git@github.com:pyer/[repo]
@@ -12,19 +18,24 @@ git remote set-url origin git@github.com:pyer/[repo]
 git status
 ```
 
-####add modified file
+####add modified file to staging area
 ```
 git add [file]
 ```
 
-####save changes in local repository
+####replace modified file with last commited one
+```
+git checkout -- [file]
+```
+
+####commit changes to Git directory
 ```
 git commit -m "+ comment"
 ```
 
 ####update remote repository
 ```
-git push origin master
+git push
 ```
 
 ####update local repository
