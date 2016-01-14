@@ -18,6 +18,12 @@ git remote set-url origin git@github.com:pyer/[repo]
 git status
 ```
 
+####show commit logs with file names
+```
+git log --name-status --oneline
+```
+
+
 ####add modified file to staging area
 ```
 git add [file]
