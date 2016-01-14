@@ -23,9 +23,9 @@ git status
 git add [file]
 ```
 
-####replace modified file with last commited one
+####replace modified file by last commited one
 ```
-git checkout -- [file]
+git checkout [file]
 ```
 
 ####commit changes to Git directory
