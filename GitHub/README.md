@@ -48,6 +48,11 @@ git checkout [file]
 git commit -m "+ comment"
 ```
 
+####add staging area changes to the last commit
+```
+git commit --amend
+```
+
 ####update remote repository
 ```
 git push
