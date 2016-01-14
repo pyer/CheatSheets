@@ -23,6 +23,16 @@ git status
 git log --name-status --oneline
 ```
 
+####show differences between working file and commited one
+```
+git diff [file]
+```
+
+####show differences between stagged file and commited one
+```
+git diff --stagged [file]
+```
+
 
 ####add modified file to staging area
 ```
