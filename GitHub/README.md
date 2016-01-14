@@ -18,7 +18,7 @@ git remote set-url origin git@github.com:pyer/[repo]
 git status
 ```
 
-####show commit logs with file names
+####show commit history with file names
 ```
 git log --name-status --oneline
 ```
