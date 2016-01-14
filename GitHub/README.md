@@ -13,6 +13,11 @@ git clone git://github.com/pyer/[repo]
 git remote set-url origin git@github.com:pyer/[repo]
 ```
 
+####show remote repository and URL
+```
+git remote -v
+```
+
 ####show local repository status
 ```
 git status
