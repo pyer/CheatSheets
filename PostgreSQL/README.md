@@ -24,33 +24,40 @@ Type "help" for help.
 `pg_dump -U postgres -f [file_name.sql] [dbname]`
 
 
+##Recreate database before restore
+
+####with SQL commands (psql -U postgres)
+```SQL
+DROP DATABASE IF EXISTS [dbname];"`
+CREATE DATABASE [dbname] ENCODING 'UTF-8' OWNER [user_name];"`
+\c [dbname]
+DROP EXTENSION IF EXISTS plpgsql;"
+\q
+```
+
+####with PostgreSQL tools
+```
+dropdb     -U [user_name] --if-exists [dbname]
+createdb   -U [user_name] -E 'UTF-8' [dbname]
+psql       -U postgres    -d [dbname] -q -c "DROP EXTENSION IF EXISTS plpgsql;"
+```
+
+
 ##Restore
 
 ####database from a dump file
 ```
-dropdb     -U [user_name] --if-exists [dbname]
-createdb   -U [user_name] -E 'UTF-8' [dbname]
-psql       -U [user_name] -d [dbname] -c "DROP EXTENSION IF EXISTS plpgsql;"
 pg_restore -U [user_name] -d [dbname] -x -j [threads] [file_name.dump]
 ```
 
 ####only one table from a dump file
 ```
-pg_restore -U [user_name] -d [dbname] --table=table_name [file_name.dump]
+psql -U [user_name] -d [dbname] -c "TRUNCATE TABLE [table_name];"
+pg_restore -U [user_name] -d [dbname] --table=[table_name] [file_name.dump]
 ```
 
 
 ##SQL commands
-
-####Create a database
-```SQL
-CREATE DATABASE [dbname] ENCODING 'UTF-8' owner [user_name];
-```
-
-####Drop a database
-```SQL
-DROP DATABASE [dbname];
-```
 
 ####Running queries
 ```SQL
@@ -78,3 +85,5 @@ SELECT last_autovacuum, last_autoanalyze FROM pg_stat_user_tables
     WHERE last_autovacuum IS NOT NULL
     ORDER BY last_autovacuum DESC;
 ```
+
+
