@@ -28,6 +28,16 @@ git status
 git log --name-status --oneline
 ```
 
+####show commit history of a single file
+```
+git log --name-status --oneline -- [file_name]
+```
+
+####show a single file from  specific revision
+```
+git show [commit_id]:[file_name]
+```
+
 ####show differences between working directory and staging area
 ```
 git diff
