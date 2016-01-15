@@ -79,6 +79,11 @@ SELECT pg_terminate_backend(pid);
 SELECT name, setting, boot_val, reset_val, unit FROM pg_settings ORDER BY name;
 ```
 
+####Reload configuration
+```SQL
+SELECT pg_reload_conf();
+```
+
 ####Last autovacuum
 ```SQL
 SELECT last_autovacuum, last_autoanalyze FROM pg_stat_user_tables
@@ -86,4 +91,8 @@ SELECT last_autovacuum, last_autoanalyze FROM pg_stat_user_tables
     ORDER BY last_autovacuum DESC;
 ```
 
+####Size of databases
+```SQL
+SELECT datname,pg_size_pretty(pg_database_size(datname)) AS size FROM pg_database;
+```
 
