@@ -52,7 +52,6 @@ pg_restore -U [user_name] -d [dbname] -x -j [threads] [file_name.dump]
 
 ####only one table from a dump file
 ```
-psql -U [user_name] -d [dbname] -c "TRUNCATE TABLE [table_name];"
 pg_restore -U [user_name] -d [dbname] --table=[table_name] [file_name.dump]
 ```
 
@@ -94,5 +93,15 @@ SELECT last_autovacuum, last_autoanalyze FROM pg_stat_user_tables
 ####Size of databases
 ```SQL
 SELECT datname,pg_size_pretty(pg_database_size(datname)) AS size FROM pg_database;
+```
+
+####Show duplicate records
+```SQL
+SELECT * FROM table_name t1 WHERE (SELECT count(*) FROM table_name t2 where t1.field_name=t2.field_name) > 1;
+```
+
+####Count duplicate records
+```SQL
+SELECT field_name, count(*) FROM table_name GROUP BY field_name HAVING count(*)>1;
 ```
 
