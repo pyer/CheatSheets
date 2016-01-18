@@ -97,11 +97,23 @@ SELECT datname,pg_size_pretty(pg_database_size(datname)) AS size FROM pg_databas
 
 ####Show duplicate records
 ```SQL
-SELECT * FROM table_name t1 WHERE (SELECT count(*) FROM table_name t2 where t1.field_name=t2.field_name) > 1;
+SELECT * FROM table_name t1
+    WHERE (SELECT count(*) FROM table_name t2
+               WHERE t1.field1=t2.field1 AND t1.field2=t2.field2) > 1;
 ```
 
 ####Count duplicate records
 ```SQL
-SELECT field_name, count(*) FROM table_name GROUP BY field_name HAVING count(*)>1;
+SELECT field1, field2, count(*) FROM table_name GROUP BY field1, field2 HAVING count(*)>1;
+```
+
+####Duplicate a table
+```SQL
+CREATE TABLE target_name AS TABLE table_name;
+```
+
+####Copy some datas from a table to a new one
+```SQL
+CREATE TABLE target_name AS SELECT field1, field2 FROM table_name WHERE condition;
 ```
 
