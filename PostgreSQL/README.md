@@ -112,7 +112,7 @@ SELECT field1, field2, count(*) FROM table_name GROUP BY field1, field2 HAVING c
 CREATE TABLE target_name AS TABLE table_name;
 ```
 
-####Copy some datas from a table to a new one
+####Copy some data from a table to a new one
 ```SQL
 CREATE TABLE target_name AS SELECT field1, field2 FROM table_name WHERE condition;
 ```
