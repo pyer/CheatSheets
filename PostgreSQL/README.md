@@ -117,3 +117,13 @@ CREATE TABLE target_name AS TABLE table_name;
 CREATE TABLE target_name AS SELECT field1, field2 FROM table_name WHERE condition;
 ```
 
+####Convert timestamp to epoch (int)
+```SQL
+SELECT EXTRACT(EPOCH FROM TIMESTAMP '2015-03-01 00:00:00');
+```
+
+####Convert epoch to timestamp
+```SQL
+SELECT TO_TIMESTAMP(1425168000);
+```
+
