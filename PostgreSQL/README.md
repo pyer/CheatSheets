@@ -1,25 +1,37 @@
 #PostgreSQL 9 cheat sheet
 
 Connect to a database
-`psql -U [user_name] -d [dbname]`
+```
+psql -U [user_name] -d [dbname]
+```
 
 Connect and show internal queries
-`psql -U postgres -E`
+```
+psql -U postgres -E
+```
 
 
 Execute a SQL script
-`psql -U [user_name] -d [dbname] -f [file_name.sql]`
+```
+psql -U [user_name] -d [dbname] -f [file_name.sql]
+```
 
 ##Backup
 
 to a zipped dump file
-`pg_dump -U postgres -Fc -f [file_name.dump] [dbname]`
+```
+pg_dump -U postgres -Fc -f [file_name.dump] [dbname]
+```
 
 to a script file
-`pg_dump -U postgres -f [file_name.sql] [dbname]`
+```
+pg_dump -U postgres -f [file_name.sql] [dbname]
+```
 
 a single table
-`pg_dump -U postgres -Fc -a -t [table_name] -f [file_name.dump] [dbname]`
+```
+pg_dump -U postgres -Fc -a -t [table_name] -f [file_name.dump] [dbname]
+```
 
 ##Recreate database before restore
 
