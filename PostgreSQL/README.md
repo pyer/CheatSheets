@@ -33,18 +33,15 @@ a single table
 pg_dump -U postgres -Fc -a -t [table_name] -f [file_name.dump] [dbname]
 ```
 
-##Recreate database before restore
-
-```SQL
-DROP DATABASE IF EXISTS [dbname];
-CREATE DATABASE [dbname] ENCODING 'UTF-8' OWNER [user_name];
-\c [dbname]
-DROP EXTENSION IF EXISTS plpgsql;
-```
-
 ##Restore
 
-database from a dump file
+a database from a dump file (the database doesn't exist and is named by the dump)
+```
+pg_restore -U [ user_name] -d template1 -C -j [threads] [file_name.dump]
+
+```
+
+an existing database from a dump file
 ```
 pg_restore -U [ user_name] -d [dbname] -x -j [threads] [file_name.dump]
 
@@ -55,6 +52,16 @@ a single table from a dump file
 psql -U [user_name] -d [dbname] -c "truncate table historiqueproduitcourant;"
 pg_restore -U [user_name] -d [dbname] -t [table_name] [file_name.dump]
 ```
+
+##Create a new database
+
+```SQL
+DROP DATABASE IF EXISTS [dbname];
+CREATE DATABASE [dbname] ENCODING 'UTF-8' OWNER [user_name];
+\c [dbname]
+DROP EXTENSION IF EXISTS plpgsql;
+```
+
 
 ##Administrator SQL commands
 
