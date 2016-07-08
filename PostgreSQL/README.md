@@ -49,7 +49,7 @@ pg_restore -U [ user_name] -d [dbname] -x -j [threads] [file_name.dump]
 
 a single table from a dump file
 ```
-psql -U [user_name] -d [dbname] -c "truncate table historiqueproduitcourant;"
+psql -U [user_name] -d [dbname] -c "truncate table [table_name];"
 pg_restore -U [user_name] -d [dbname] -t [table_name] [file_name.dump]
 ```
 
